@@ -1,32 +1,33 @@
 ## 250717
 # GIT 기본
 
-git : 분산 버전 관리 시스템
+**git** : 분산 버전 관리 시스템
 
-git : 로컬저장소 // github : 원격저장소
+**git** : 로컬저장소 // github : 원격저장소
 
-git init : git 시작
+**git init** : git 시작
 
-git add . : staging area에 올리기
-git status : staging area의 작업 파일 확인
+**git add .** : staging area에 올리기
+**git status** : staging area의 작업 파일 확인
 
-<git commit 전에>
+<___git commit 전에___>
+
 git config --global user.name "이름"
 
 git config --global user.email "이메일"
 
 git config --global -l : user.name과 user.email 확인
 
-git commit -m "메시지명" : repository에 올리기
+**git commit -m "메시지명"** : repository에 올리기
 git log : 커밋 이력을 확인
 
-git remote add origin url : 로컬 저장소와 원격저장소를 연결(origin은 별칭)
+**git remote add origin url** : 로컬 저장소와 원격저장소를 연결(origin은 별칭)
 git remote -v : remote 목록 확인
 
 git remote rm 별칭 : remote 이력 삭제
 
 
-git push origin +master : 가장 최근에 commit 되어있던 것을 강제로 push
+**git push origin +master** : 가장 최근에 commit 되어있던 것을 강제로 push
                                  (origin:별칭, master:branch명, +:강제로 진행)
 
 ==================================================
@@ -69,7 +70,7 @@ add 하지 않기 위해 .gitignore파일을 만든다(staging area에 올리지
 
 # GIT 심화
 
-commit 메시지 수정하기
+___commit 메시지 수정하기___
 
 명령어 : git commit --amend
 
@@ -79,7 +80,7 @@ esc -> :wq! : 강제 저장하고 종료
 
 ====================================
 
-git revert : 특정 commit을 없었던 일로 만들기
+___git revert___ : 특정 commit을 없었던 일로 만들기
 
 a.txt 만들고 commit
 b.txt 만들고 commit
@@ -93,16 +94,17 @@ vim 에디터 -> esc -> :wq
 
 ==========================================
 
-git reset : 특정 commit으로 되돌리기
+**git reset** : 특정 commit으로 되돌리기
 
-git reflog : 이전 과거 commit 기록들을 모두 볼 수 있음
+**git reflog** : 이전 과거 commit 기록들을 모두 볼 수 있음
 
-명령어 : git reset --hard HEAD@{번호}
+명령어 : **git reset --hard HEAD@{번호}**
 
 =========================================
 
 staging area 있는 작업을 working directory로 옮기기
-(git add 취소하기)
+
+___git add 취소하기___
 
 <git 2.23 버전 이전>
 
