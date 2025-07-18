@@ -169,7 +169,12 @@ A) 수 백개의 파일을 일일이 git add 하기에는 불편하기 때문에
 add 하지 않기 위해 .gitignore파일을 만든다(staging area에 올리지 않기 위해)
 
 방법 : .gitignore 파일 생성 -> add 하지 않을 파일명이나 폴더명 작성하고 저장 
+
+<img width="1248" height="476" alt="image" src="https://github.com/user-attachments/assets/8414a32a-3536-4d94-a037-68ee24850e7c" />
+
 ***
+
+
 
 
 # GIT 심화
@@ -217,3 +222,6 @@ git rm --cached 파일명
 
 2. 이전에 했던 commit이 있는경우(권장 방법)
 git restore --staged 파일명
+=============================================
+
+## 250718
