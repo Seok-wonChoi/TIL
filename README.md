@@ -319,5 +319,5 @@ git restore --staged 파일명
       + 위키피디아에 없는 정보 : 사과 회사에 대한 핵심 기술에 대해 알려줘
 
 
-# Vive Coding
+# Vibe Coding
 <img width="1064" height="570" alt="image" src="https://github.com/user-attachments/assets/78aa4248-5caa-4bdf-8dfc-33fadc12d332" />
