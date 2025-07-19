@@ -1,3 +1,21 @@
+## GIT
+<git commit 전에>
+
+git config --global user.name "이름"
+
+git config --global user.email "이메일"
+
+git config --global -l : user.name과 user.email 확인
+
+git commit -m "메시지명" : repository에 올리기 git log : 커밋 이력을 확인
+
+git remote add origin url : 로컬 저장소와 원격저장소를 연결(origin은 별칭) git remote -v : remote 목록 확인
+
+git remote rm 별칭 : remote 이력 삭제
+
+git push origin +master : 가장 최근에 commit 되어있던 것을 강제로 push (origin:별칭, master:branch명, +:강제로 진행)
+***
+
 ## 앵커 링크
 
 - [헤더적기](#헤더적기)
