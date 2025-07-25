@@ -81,13 +81,17 @@ git init  : git 시작 (로컬 저장소 생성)
 rm -rf .git : git 삭제(git 종료)
 
 git add . : staging area에 변경사항 올리기
+
 git status : staging area의 작업 파일 확인
 
 git config --global user.email "이메일주소"
+
 git config --global user.name "이름"
+
 git config --global -l
 
 git commit -m "메시지명" : repository에(staging area의 변경사항을)올리기
+
 git log : repository 작업 파일 확인 (커밋 이력 확인)
 
 ===================================================
