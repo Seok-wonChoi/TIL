@@ -410,7 +410,7 @@ def dfs(n, sum_v):
     if n == b:
         max_v = max(max_v, sum_v)
         min_v = min(min_v, sum_v)
-
+        return
     for i in range(6):
         if arr[n][i] == 0: continue
         if used[i] == 1: continue
