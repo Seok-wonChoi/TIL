@@ -382,7 +382,7 @@ dfs(0, 0)'''
 a, b = map(int, input().split())
 cnt = 0
 arr = [[0] * 6 for _ in range(6)]
-max_v = float('-inf')
+max_v = 0
 min_v = float('inf')
 val = 0
 
@@ -408,8 +408,8 @@ def dfs(n, sum_v):
     global min_v
 
     if n == b:
-        if max_v < sum_v: max_v = sum_v
-        if min_v > sum_v: min_v = sum_v
+        max_v = max(max_v, sum_v)
+        min_v = min(min_v, sum_v)
 
     for i in range(6):
         if arr[n][i] == 0: continue
