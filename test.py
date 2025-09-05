@@ -379,12 +379,11 @@ dfs(0, 0)'''
 ##########################################
 # DFS final
 
-a, b = map(int, input().split())
-cnt = 0
+'''a, b = map(int, input().split())
 arr = [[0] * 6 for _ in range(6)]
 max_v = 0
 min_v = float('inf')
-val = 0
+
 
 arr[0][1] = 2
 arr[0][2] = 6
@@ -420,4 +419,42 @@ def dfs(n, sum_v):
 
 dfs(a, 0)
 print(max_v)
-print(min_v)
+print(min_v)'''
+
+
+###########################################
+# boss 문제 - 럭셔리 여행
+
+# import sys
+# sys.stdin = open("input.txt", "r")
+#
+# `N = int(input())
+# arr = [list(map(int, input().split())) for _ in range(N)]
+# a, b = map(int, input().split())
+#
+# max_v = float('-inf')
+# min_v = float('inf')
+#
+# used = [0] * N
+# used[a] = 1
+#
+# def dfs(now, sum_v):
+#     global max_v
+#     global min_v
+#
+#     if now == b:
+#         max_v = max(max_v, sum_v)
+#         min_v = min(min_v, sum_v)
+#         return
+#
+#     for i in range(N):
+#         if arr[now][i] == 0: continue
+#         if used[i] == 1: continue
+#         used[i] = 1
+#         dfs(i , sum_v + arr[now][i])
+#         used[i] = 0
+#
+# dfs(a, 0)
+#
+# print(min_v)
+# print(max_v)
