@@ -1,5 +1,5 @@
-# import sys
-# sys.stdin = open("input.txt", "r")
+import sys
+sys.stdin = open("input.txt", "r")
 
 
 #
@@ -458,3 +458,153 @@ print(min_v)'''
 #
 # print(min_v)
 # print(max_v)
+
+# from collections import deque
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N, M = map(int, input().split())
+#     arr = deque(map(int, input().split()))
+#     for i in range(M):
+#         arr.append(arr.popleft())
+#     print(f'#{tc} {arr[0]}')
+
+
+# import heapq
+# pq = []
+# sort_arr = []
+# heapq.heappush(pq, 5)
+# while pq:
+#     sort_arr.append(heapq.heappop(pq))
+# print(sort_arr)
+
+# from collections import deque
+#
+# alist = [[] for _ in range(7)]
+# alist[5] = [3, 1]
+# alist[3] = [2]
+# alist[1] = [4]
+# alist[4] = [0, 6]
+#
+#
+# q = deque
+# q.append((5))
+#
+# while q:
+#     now = q[0]
+#     q.popleft()
+#     print(now, end=' ')
+#
+#     for i in range(len(alist[now])):
+#         next = alist[now][i]
+#         q.append(next)
+
+
+##############################################
+# Baby-gin
+
+
+# used = [0] * 6
+# path = []
+# is_babygin = 0
+# def is_baby_gin():
+#     cnt = 0
+#
+#     a, b, c = path[0], path[1], path[2]
+#     if a == b == c: cnt += 1
+#     elif (a) == (b -1) == (c -2) : cnt += 1
+#
+#     a, b, c = path[3], path[4], path[5]
+#     if a == b == c: cnt += 1
+#     elif (a) == (b -1) == (c -2) : cnt += 1
+#
+#     return cnt == 2
+#
+# def recur(lev):
+#     global is_babygin
+#     if lev == 6:
+#         if is_baby_gin():
+#             is_babygin = 1
+#         return
+#
+#     for i in range(6):
+#         if used[i] == 1: continue
+#         used[i] = 1
+#         path.append(arr[i])
+#         recur(lev + 1)
+#         path.pop()
+#         used[i] = 0
+#
+# arr = list(map(int, input().split()))
+# recur(0)
+# if is_babygin: print('Yes')
+# else: print('No')
+
+###########################
+# 최소합
+
+# import sys
+# sys.stdin = open("input.txt", "r")
+
+
+
+# def dfs(y, x, sum_v):
+#     global min_sum
+#
+#     if y == N-1 and x == N-1:
+#         min_sum = min(min_sum, sum_v)
+#         return
+#         # 가지치기
+#     if min_sum <= sum_v: return
+#
+#
+#     if x < N -1:
+#         dfs(y, x + 1, sum_v + arr[y][x+1])
+#     if y < N -1:
+#         dfs(y + 1, x, sum_v + arr[y+1][x])
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     arr = [list(map(int, input().split())) for _ in range(N)]
+#     min_sum = float('inf')
+#
+#     dfs(0, 0, arr[0][0])
+#     print(f'#{tc} {min_sum}')
+
+
+
+##########################################
+# 전자카트
+
+'''
+def dfs(lev, sum_v):
+    global min_v
+
+
+    # 마지막 구역에서 사무실로 돌아오는 비용
+    if lev == N -1:
+        sum_v += arr[path[-1]][0]
+        min_v = min(min_v, sum_v)
+        return
+
+
+    for i in range(1, N):
+        if used[i] == 1: continue
+        used[i] = 1
+        path.append(i)
+        dfs(lev + 1, sum_v + arr[path[-2]][i])
+        path.pop()
+        used[i] = 0
+
+T = int(input())
+for tc in range(1, T + 1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    min_v = float('inf')
+    path = [0]
+    used = [0] * N
+    used[0] = 1
+    dfs(0, 0)
+    print(f'#{tc} {min_v}')
+    '''
