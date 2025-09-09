@@ -1,6 +1,6 @@
-import sys
-sys.stdin = open("input.txt", "r")
-
+# import sys
+# sys.stdin = open("input.txt", "r")
+#
 
 #
 # path = []
@@ -504,41 +504,44 @@ print(min_v)'''
 # Baby-gin
 
 
-# used = [0] * 6
-# path = []
-# is_babygin = 0
-# def is_baby_gin():
-#     cnt = 0
-#
-#     a, b, c = path[0], path[1], path[2]
-#     if a == b == c: cnt += 1
-#     elif (a) == (b -1) == (c -2) : cnt += 1
-#
-#     a, b, c = path[3], path[4], path[5]
-#     if a == b == c: cnt += 1
-#     elif (a) == (b -1) == (c -2) : cnt += 1
-#
-#     return cnt == 2
-#
-# def recur(lev):
-#     global is_babygin
-#     if lev == 6:
-#         if is_baby_gin():
-#             is_babygin = 1
-#         return
-#
-#     for i in range(6):
-#         if used[i] == 1: continue
-#         used[i] = 1
-#         path.append(arr[i])
-#         recur(lev + 1)
-#         path.pop()
-#         used[i] = 0
-#
-# arr = list(map(int, input().split()))
-# recur(0)
-# if is_babygin: print('Yes')
-# else: print('No')
+'''
+used = [0] * 6
+path = []
+is_babygin = 0
+def is_baby_gin():
+    cnt = 0
+
+    a, b, c = path[0], path[1], path[2]
+    if a == b == c: cnt += 1
+    elif a == (b -1) == (c -2) : cnt += 1
+
+    a, b, c = path[3], path[4], path[5]
+    if a == b == c: cnt += 1
+    elif a == (b -1) == (c -2) : cnt += 1
+
+    return cnt == 2
+
+def recur(lev):
+    global is_babygin
+    if lev == 6:
+        if is_baby_gin():
+            is_babygin = 1
+        return
+
+    for i in range(6):
+        if used[i] == 1: continue
+        used[i] = 1
+        path.append(arr[i])
+        recur(lev + 1)
+        path.pop()
+        used[i] = 0
+
+arr = list(map(int, input().split()))
+recur(0)
+if is_babygin: print('Yes')
+else: print('No')
+'''
+
 
 ###########################
 # 최소합
@@ -581,9 +584,8 @@ print(min_v)'''
 def dfs(lev, sum_v):
     global min_v
 
-
     # 마지막 구역에서 사무실로 돌아오는 비용
-    if lev == N -1:
+    if lev == N - 1:
         sum_v += arr[path[-1]][0]
         min_v = min(min_v, sum_v)
         return
@@ -607,4 +609,246 @@ for tc in range(1, T + 1):
     used[0] = 1
     dfs(0, 0)
     print(f'#{tc} {min_v}')
+'''
+
+
+#################################################################################
+'''
+def baby_gin():
+    cnt = 0
+
+    a, b, c = path[0], path[1], path[2]
+    if a == b == c: cnt += 1
+    elif a == (b-1) == (c-1): cnt += 1
+
+    a, b, c = path[3], path[4], path[5]
+    if a == b == c: cnt += 1
+    elif a == (b-1) == (c-1): cnt += 1
+
+    return cnt == 2
+
+
+
+def dfs(lev):
+    global is_babygin
+
+    if lev == 6:
+        if baby_gin():
+            is_babygin = 1
+        return
+
+    for i in range(6):
+        if used[i] == 1: continue
+        used[i] = 1
+        path.append(arr[i])
+        dfs(lev + 1)
+        path.pop()
+        used[i] = 0
+
+
+used = [0] * 6
+path = []
+arr = list(map(int, input().split()))
+is_babygin = 0
+
+dfs(0)
+if is_babygin: print('Yes')
+else: print('No')'''
+
+
+
+
+
+
+###################################
+# 증가하는 사탕 수열
+
+'''
+####### 함수 O
+T = int(input())
+for tc in range(1, T + 1):
+    a, b, c = map(int, input().split())
+    eat_cnt = 0
+
+    if a < 1 or b < 2 or c < 3:
+        print(f'#{tc} -1')
+        continue
+    elif a < b < c:
+        print(f'#{tc} 0')
+        continue
+
+    if b >= c:
+        eat_cnt += (b - c + 1)
+        b -= eat_cnt
+    if a >= b:
+        eat_cnt += (a - b + 1)
+        a -= eat_cnt
+    print(f'#{tc} {eat_cnt}')
+
+
+####### 함수 X
+def cnt_candy(a, b, c):
+    eat_cnt = 0
+
+    if a < 1 or b < 2 or c < 3: return -1
+    if a < b < c: return 0
+
+    if b >= c:
+        eat_cnt += (b - c + 1)
+        b -= eat_cnt
+    if a >= b:
+        eat_cnt += (a - b + 1)
+        a -= eat_cnt
+    return eat_cnt
+
+T = int(input())
+for tc in range(1, T + 1):
+    a, b, c = map(int, input().split())
+    print(f'#{tc} {cnt_candy(a, b, c)}')
+'''
+
+
+#############################
+# 전봇대
+
+
+
+
+def get_result():
+    size = len(arr)
+    cnt = 0
+
+    for i in range(size): # 기준이 되는 전봇대
+        for tar in range(i): # 갯수를 세야하는 전봇대
+            # a 첫번째 전봇대, b 두번째 전봇대
+            i_a, i_b = arr[i][0], arr[i][1]
+            tar_a, tar_b = arr[tar][0], arr[tar][1]
+
+            if i_b < tar_b: cnt += 1
+
+    return cnt
+
+
+T = int(input())
+for tc in range(1, T + 1):
+    N = int(input())
+    arr=[]
+    for n in range(N):
+        a, b = map(int, input().split()) # 전봇대
+        arr.append((a, b))
+
+    arr.sort(key=lambda x : x[0]) # 첫 번째 원소(a전봇대)를 기준으로 정렬
+    result = get_result()
+    print(f'#{tc} {result}')
+
+
+####################
+# 탈주범 검거
+
+'''
+from collections import deque
+alist = [[] * for _ in range(7)]
+
+alist[0] = [1, 2]
+alist[1] = [3]
+alist[2] = [4]
+alist[4] = [5, 6]
+
+q = deque()
+q.append(0)
+
+while q:
     '''
+
+
+'''from collections import deque
+
+alist = list([] for _ in range(5))
+
+alist[0] = [1, 2]
+alist[1] = [0, 2]
+alist[2] = [0, 1, 3]
+alist[3] = [2, 4]
+alist[4] = [3]
+q = deque()
+
+N = int(input())
+q.append(N)
+used = [0] * 6
+used[N] = 1
+
+while q:
+    now = q[0]
+    print(chr(now + ord('A')), end = ' ')
+    q.popleft()
+
+    for i in range(len(alist[now])):
+        next = alist[now][i]
+
+        if used[next] == 1: continue
+        used[next] = 1
+        q.append(next)'''
+
+'''
+from collections import deque
+
+alist = [[0] * 5 for _ in range(5)]
+
+alist[0][1] = 1
+alist[0][4] = 1
+alist[1][3] = 1
+alist[1][4] = 1
+alist[2][0] = 1
+alist[3][0] = 1
+alist[3][2] = 1
+q = deque()
+s, e = map(int, input().split())
+used = [0] * 5
+used[s] = 1
+q.append((s, 0))
+
+while q:
+    now, level = q[0]
+    q.popleft()
+    if now == e:
+        print(level)
+    for i in range(5):
+        if alist[now][i] == 0: continue
+        if used[i] == 1: continue
+        used[i] = 1
+        q.append((i, level + 1))
+'''
+
+
+from collections import deque
+visited = [[0] * 5 for _ in range(5)]
+
+dy = [-1, 1, 0, 0]
+dx = [0, 0, -1, 1]
+
+def flood_fill(start_y, start_x):
+    q = deque()
+    q.append((start_y, start_x))
+    visited[start_y][start_x] = 1
+
+    while q:
+        now_y, now_x = q.popleft()
+
+        for i in range(4):
+            ny = now_y + dy[i]
+            nx = now_x + dx[i]
+
+            if ny < 0 or nx < 0 or ny >= 5 or nx >= 5: continue
+
+            if visited[ny][nx] != 0:continue
+            visited[ny][nx] = visited[now_y][now_x] + 1
+            q.append((ny, nx))
+
+sty, stx = map(int, input().split())
+flood_fill(sty, stx)
+
+for y in range(5):
+    for x in range(5):
+        print(visited[y][x], end=' ')
+    print()
+

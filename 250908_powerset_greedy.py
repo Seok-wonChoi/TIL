@@ -78,7 +78,7 @@ for target in range(1 << len(arr)):
 # Baby-gin
 
 
-'''used = [0] * 6
+used = [0] * 6
 path = []
 is_babygin = 0
 def is_baby_gin():
@@ -112,13 +112,13 @@ def recur(lev):
 arr = list(map(int, input().split()))
 recur(0)
 if is_babygin: print('Yes')
-else: print('No')'''
+else: print('No')
 
 
 ############################
 # 최소합
 
-'''def dfs(y, x, sum_v):
+def dfs(y, x, sum_v):
     global min_sum
 
     if y == N-1 and x == N-1:
@@ -140,13 +140,13 @@ for tc in range(1, T + 1):
     min_sum = float('inf')
 
     dfs(0, 0, arr[0][0])
-    print(f'#{tc} {min_sum}')'''
+    print(f'#{tc} {min_sum}')
 
 
 ##############################################
 # 전자카트
 
-'''
+
 def dfs(lev, sum_v):
     global min_v
 
@@ -176,4 +176,3 @@ for tc in range(1, T + 1):
     used[0] = 1
     dfs(0, 0)
     print(f'#{tc} {min_v}')
-    '''
