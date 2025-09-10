@@ -1,6 +1,6 @@
-# import sys
-# sys.stdin = open("input.txt", "r")
-#
+import sys
+sys.stdin = open("input.txt", "r")
+
 
 #
 # path = []
@@ -713,12 +713,12 @@ for tc in range(1, T + 1):
 
 
 
-
+'''
 def get_result():
     size = len(arr)
     cnt = 0
 
-    for i in range(size): # 기준이 되는 전봇대
+    for i in range(len(arr)): # 기준이 되는 전봇대
         for tar in range(i): # 갯수를 세야하는 전봇대
             # a 첫번째 전봇대, b 두번째 전봇대
             i_a, i_b = arr[i][0], arr[i][1]
@@ -740,7 +740,7 @@ for tc in range(1, T + 1):
     arr.sort(key=lambda x : x[0]) # 첫 번째 원소(a전봇대)를 기준으로 정렬
     result = get_result()
     print(f'#{tc} {result}')
-
+'''
 
 ####################
 # 탈주범 검거
@@ -819,7 +819,7 @@ while q:
         q.append((i, level + 1))
 '''
 
-
+'''
 from collections import deque
 visited = [[0] * 5 for _ in range(5)]
 
@@ -851,4 +851,150 @@ for y in range(5):
     for x in range(5):
         print(visited[y][x], end=' ')
     print()
+'''
+
+
+'''
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    result = merge(left, right)
+    return result
+
+def merge(left, right):
+    result = []
+    i, j = 0, 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result
+
+arr = [64, 34, 25, 12, 22, 11, 90]
+sorted_arr = merge_sort(arr)
+print(*sorted_arr)
+'''
+
+#####################
+# 병합 정렬
+
+'''
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    result = merge(left, right)
+
+    return result
+
+def merge(left, right):
+    global cnt
+    result = []
+    i, j = 0, 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    if j > i: cnt += 1
+    # if left[-1] > right[-1]: cnt += 1
+    result.extend(left[i:])
+
+    result.extend(right[j:])
+
+    return result
+
+T = int(input())
+for tc in range(1, T + 1):
+    N = int(input())
+    arr = list(map(int, input().split()))
+    cnt = 0
+    sorted_arr = merge_sort(arr)
+
+    print(f'#{tc} {sorted_arr[N//2]} {cnt}')
+'''
+
+
+
+
+
+# def quick_sort():
+# def quick_sort(arr):
+#     if len(arr) <= 1: return arr
+#
+#     pivot = arr[len(arr) // 2]
+#     left = [x for x in arr if x < pivot]
+#     middle = [x for x in arr if x == pivot]
+#     right = [x for x in arr if x > pivot]
+#
+#     result = quick_sort(left) + middle + quick_sort(right)
+#     return result
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     arr = list(map(int, input().split()))
+#     sorted_arr = quick_sort(arr)
+#
+#     print(f'#{tc} {sorted_arr[len(sorted_arr) // 2]}')
+
+
+
+
+
+# 이진탐색 (먼저 sort()하고 탐색) | start, middle, end 는 인덱스
+
+def binary_search(arr, target):
+    global cnt
+    start = 0
+    end = len(arr) - 1
+
+    while start <= end: # start와 end가 같아질때까지
+        mid = (start + end) // 2
+        # 이진 탐색을 통해서 타겟을 찾으면 middle 인덱스 반환
+        if arr[mid] == target:
+            cnt += 1
+            return mid
+        # 타겟이 중간값 보다 크면 오른쪽 부분 탐색
+        elif arr[mid] < target:
+            cnt += 1
+            start = mid + 1
+        else: # 타겟이 중간값보다 작으면 왼쪽 부분 탐색
+            cnt += 1
+            end = mid - 1
+    # 타겟 못찾으면
+    return -1
+T = int(input())
+for tc in range(1, T + 1):
+    N, M = map(int, input().split())
+    a_list = list(map(int, input().split()))
+    b_list = list(map(int, input().split()))
+    cnt = 0
+    for i in b_list:
+        if i not in a_list: continue
+        target = i
+        result = binary_search(a_list, target)
+        # cnt += 1
+
+    print(f'#{tc} {cnt}')
+
+
 
