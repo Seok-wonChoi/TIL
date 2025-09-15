@@ -962,39 +962,503 @@ for tc in range(1, T + 1):
 
 # 이진탐색 (먼저 sort()하고 탐색) | start, middle, end 는 인덱스
 
-def binary_search(arr, target):
+
+
+# def binary_search(arr, target):
+#     global cnt
+#     start = 0
+#     end = len(arr) - 1
+#     flag = 0
+#
+#     while start <= end: # start와 end가 같아질때까지
+#         mid = (start + end) // 2
+#         # 이진 탐색을 통해서 타겟을 찾으면 middle 인덱스 반환
+#         if arr[mid] == target:
+#             return True
+#         # 타겟이 중간값 보다 크면 오른쪽 부분 탐색
+#         elif arr[mid] < target:
+#             if flag == 2: break
+#             flag = 2
+#             start = mid + 1
+#         else: # 타겟이 중간값보다 작으면 왼쪽 부분 탐색
+#             if flag == 1: break
+#             flag = 1
+#             end = mid - 1
+#     # 타겟 못찾으면
+#     return False
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N, M = map(int, input().split())
+#     a_list = sorted(list(map(int, input().split())))
+#     b_list = list(map(int, input().split()))
+#     cnt = 0
+#     for i in b_list:
+#         cnt += binary_search(a_list, i)
+#     print(f'#{tc} {cnt}')
+
+
+
+'''from collections import deque
+
+alist = list([] for _ in range(5))
+
+alist[0] = [1, 2]
+alist[1] = [0, 2]
+alist[2] = [0, 1, 3]
+alist[3] = [2, 4]
+alist[4] = [3]
+
+N = int(input())
+q = deque()
+q.append(N)
+
+used = [0] * 5
+used[N] = 1
+
+while q:
+
+    now = q[0]
+    print( chr(now + ord('A')),end=' ')
+    q.popleft()
+    for i in range(len(alist[now])):
+        next = alist[now][i]
+
+        if used[next] == 1: continue
+        used[next] = 1
+        q.append(next)
+'''
+#################
+# N Queen
+
+# N = int(input())
+
+
+
+# arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# ox = ['O', 'X']
+# path = []
+#
+# def get_arr():
+#     sum_v = 0
+#     num = []
+#     for i in range(10):
+#         if path[i] == 'O':
+#             sum_v += arr[i]
+#             if sum_v > 10: return
+#             num.append(arr[i])
+#     if sum_v == 10:
+#         print(*num)
+#
+# def dfs(lev):
+#     if lev == 10:
+#         get_arr()
+#         return
+#
+#     for i in range(2):
+#         path.append(ox[i])
+#         dfs(lev + 1)
+#         path.pop()
+# dfs(0)
+
+'''used = [0] * 20
+used1 = [0] * 100
+used2 = [0] * 100
+def queen(row):
     global cnt
-    start = 0
-    end = len(arr) - 1
+    if row == N:
+        cnt += 1
+        return
 
-    while start <= end: # start와 end가 같아질때까지
-        mid = (start + end) // 2
-        # 이진 탐색을 통해서 타겟을 찾으면 middle 인덱스 반환
-        if arr[mid] == target:
-            cnt += 1
-            return mid
-        # 타겟이 중간값 보다 크면 오른쪽 부분 탐색
-        elif arr[mid] < target:
-            cnt += 1
-            start = mid + 1
-        else: # 타겟이 중간값보다 작으면 왼쪽 부분 탐색
-            cnt += 1
-            end = mid - 1
-    # 타겟 못찾으면
-    return -1
+    for col in range(N):
+        if used[col] == 1: continue
+        if used1[col + row] == 1 : continue
+        if used2[col - row + N] == 1: continue
+
+        used[col] = 1
+        used1[col + row] = 1
+        used2[col - row + N] = 1
+
+        queen(row + 1)
+
+        used[col] = 0
+        used1[col + row] = 0
+        used2[col - row + N] = 0
+
+cnt = 0
+N = int(input())
+queen(0)
+print(cnt)'''
+
+# from collections import deque
+#
+#
+# alist = [[0] * 5 for _ in range(5)]
+#
+# alist[0][1] = 1
+# alist[0][4] = 1
+# alist[1][3] = 1
+# alist[1][4] = 1
+# alist[2][0] = 1
+# alist[3][0] = 1
+# alist[3][2] = 1
+#
+#
+# s, e = map(int, input().split())
+# q = deque()
+# used = [0] * 5
+# used[s] = 1
+# q.append((s, 0))
+#
+# while q:
+#     now, lev = q[0]
+#     if now == e:
+#         print(lev)
+#     for i in range(5):
+#         if alist[now][i] == 0: continue
+#         if used[i] == 1: continue
+#         used[i] = 1
+#         q.append((i, lev + 1))
+
+
+# def recur(idx, total_height):
+#     global min_answer
+#
+#     if total_height >= B:
+#         min_answer = min(min_answer, total_height)
+#         return
+#
+#
+#     if idx == N:
+#         return
+#
+#     recur(idx + 1, total_height + heights[idx])
+#     recur(idx + 1, total_height)
+#
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N, B = map(int, input().split())
+#     heights = list(map(int, input().split()))
+#     # min_answer = 1e8    # 나올 수 있는 최대 범위 ( 정답이 보장된 경우 )
+#     min_answer = 10000 * N    # 나올 수 없다면 최댓값의
+#
+#     recur(0, 0)
+#     print(f'#{tc} {min_answer-B}')
+
+# def get_sum(tar):
+#     sum_v = 0
+#     for i in range(N):
+#         if tar & 0x1:
+#             sum_v += heights[i]
+#         tar >>= 1
+#     return sum_v
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N, B = map(int, input().split())
+#     heights = list(map(int, input().split()))
+#     min_diff = float('inf')
+#
+#     for tar in range(1, 1 << N):
+#         total = get_sum(tar)
+#         if total >= B:
+#             diff = total - B
+#             min_diff = min(min_diff, diff)
+#     print(f'#{tc} {min_diff}')
+
+
+
+# def recur(month, sum_v):
+#     global result
+#
+#     if month > 12:
+#         result = min(result, sum_v)
+#         return
+#
+#     # 1일 이용권
+#     recur(month + 1, sum_v + (plan[month] * cost[0]))
+#
+#     # 1달 이용권
+#     recur(month + 1, sum_v + cost[1])
+#
+#     # 3달 이용권
+#     recur(month + 3, sum_v + cost[2])
+#
+#     # 1년 이용권
+#     recur(month + 12, sum_v + cost[3])
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     cost = list(map(int, input().split()))
+#     plan = [0] + list(map(int, input().split()))
+#     result = float('inf')
+#     recur(1, 0)
+#     print(f'#{tc} {result}')
+
+
+# dy = [-1, 1, 0, 0]
+# dx = [0, 0, 1, -1]
+#
+# def dfs(y, x, sum_v):
+#
+#     if len(sum_v) == 7:
+#         result.add(sum_v)
+#         return
+#     for i in range(4):
+#         ny = y + dy[i]
+#         nx = x + dx[i]
+#         if 0 > ny or  ny >= 4 or 0 > nx or nx >= 4: continue
+#         dfs(ny, nx, sum_v + arr[ny][nx])
+#
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     arr = [input().split() for _ in range(4)]
+#     result = set()
+#
+#     for y in range(4):
+#         for x in range(4):
+#             dfs(y, x, arr[y][x])
+#
+#     print(f'#{tc} {len(result)}')
+
+
+
+# dy = [-1, 1, 0, 0]
+# dx = [0, 0, 1, -1]
+#
+# def dfs(y, x):
+#     global cnt
+#
+#
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     arr = [input().split() for _ in range(N)]
+#     for y in range(N):
+#         for x in range(N):
+#             cnt = 1
+#             dfs(y, x)
+#             ny, nx = y + dy[i], x + dx[i]
+#             cnt += 1
+#             dfs(ny, nx)
+
+
+
+# 순열 문제
+# 최소거리 구하기
+# 한번씩 다 가보고 최소거리 갱신 (완전탐색)
+import sys
+sys.stdin = open("input.txt", "r")
+
+'''def get_meter(path):
+    sum_v = 0
+    sum_v += apples[path[0]][0] + apples[path[0]][1] # 0에서 출발
+    for i in range(N - 1):
+        dx = abs(apples[path[i]][0] - apples[path[i + 1]][0])
+        dy = abs(apples[path[i]][1] - apples[path[i + 1]][1])
+
+        sum_v += dx
+        sum_v += dy
+
+    sum_v += apples[path[N - 1]][0] + apples[path[N - 1]][1]  # 다시 출발지로 돌아감
+
+    return sum_v
+
+def dfs(lev):
+    global min_v
+
+    if lev == N:
+        value = get_meter(path)
+        if min_v > value:
+            min_v = value
+        return
+
+    for i in range(N):
+        if used[i] == 1: continue
+        path.append(i)
+        used[i] = 1
+        dfs(lev + 1)
+        path.pop()
+        used[i] = 0
+
+
+
 T = int(input())
+
 for tc in range(1, T + 1):
-    N, M = map(int, input().split())
-    a_list = list(map(int, input().split()))
-    b_list = list(map(int, input().split()))
-    cnt = 0
-    for i in b_list:
-        if i not in a_list: continue
-        target = i
-        result = binary_search(a_list, target)
-        # cnt += 1
+    N = int(input())
+    apples = []
+    path = []
+    used = [0] * (N + 1)
+    min_v = float('inf')
 
-    print(f'#{tc} {cnt}')
+    # 사과 담기
+    for _ in range(N):
+        x, y = map(int, input().split())
+        apples.append([x, y])
+
+    dfs(0)
+
+    print(f'#{tc} {min_v}')'''
+
+'''
+def dfs(lev, sum_v):
+    global min_v
+
+    if sum_v >= min_v:
+        return
+
+    if lev == N:
+        last = apples[path[-1]]
+        return_dist = last[0] + last[1]  # back to (0, 0)
+        total = sum_v + return_dist
+        min_v = min(min_v, total)
+        return
+
+    for i in range(N):
+        if used[i]: continue
+
+        if lev == 0:
+            # distance from (0,0) to first apple
+            dist = apples[i][0] + apples[i][1]
+        else:
+            prev = apples[path[-1]]
+            curr = apples[i]
+            dist = abs(prev[0] - curr[0]) + abs(prev[1] - curr[1])
+
+        path.append(i)
+        used[i] = 1
+        dfs(lev + 1, sum_v + dist)
+        path.pop()
+        used[i] = 0
+
+
+T = int(input())
+
+for tc in range(1, T + 1):
+    N = int(input())
+    apples = []
+    path = []
+    used = [0] * N
+    min_v = float('inf')
+
+    for _ in range(N):
+        x, y = map(int, input().split())
+        apples.append([x, y])
+
+    dfs(0, 0)
+
+    print(f'#{tc} {min_v}')
+'''
+
+from collections import deque
+
+
+# N, M = map(int, input().split())
+# arr = [[] for _ in range(11)]
+# for i in range(M):
+#     A, B = map(int, input().split())
+#     arr[A].append(B)
+#     arr[B].append(A)
+# R, K = map(int, input().split())
+#
+#
+# q = deque()
+# q.append((R, 0))
+# used = [0] * (M + 1)
+# used[R] = 1
+# cnt = 0
+# while q:
+#     now, lev = q[0]
+#     q.popleft()
+#     if now == B:
+#         if lev <= 3:
+#             cnt += 1
+#
+#     for i in range(10):
+#         if arr[now][i] == 0: continue
+#         if used[i] == 1: continue
+#         used[i] = 1
+#         q.append((i, lev + 1))
+
+
+#
+# boss = [i for i in range(10)]
+#
+# def Find(n):
+#     if boss[n] == n: return n
+#
+#     result = Find(boss[n])      # 재귀호출
+#     return result
+#
+# def Union(t1, t2):
+#     a = Find(t1) # t1의 보스는 a다
+#     b = Find(t2) # t2의 보스는 b다
+#
+#     if a == b: return # 이미 보스가 같으면 : 탈락(return)
+#     boss[b] = a     # b의 보스가 a다
+# Union(6, 7)
+# Union(5, 6)
+# Union(1, 2)
+
+# a, b = map(int, input().split())
+# # 논리 : 보스가 같으면 같은 그룹
+#
+# if Find(a) == Find(b): print('O')
+# else: print('X')
+
+
+boss = [i for i in range(8)]
+def Find(n):
+    if boss[n] == n:  # 가리키는 보스가 자기 자신이면
+        return n  # 최종 보스다
+
+    result = Find(boss[n])  # 재귀호출
+    return result
+
+
+def Union(t1, t2):
+    a = Find(t1)
+    b = Find(t2)
+
+    if a == b: return
+    boss[b] = a
+
+Union(6, 7)
+Union(5, 6)
+Union(1, 2)
+
+a, b = map(int, input().split())
+if Find(a) == Find(b):
+    print('O')
+else: print('X')
+
+
+boss = [i for i in range(10)]
+
+def Find(n):
+    if boss[n] == n: return n
+
+    result = Find(boss[n])
+    return result
+
+def Union(t1, t2):
+    a = Find(t1)
+    b = Find(t2)
+
+    if a == b: return
+    boss[b] = a
+N = int(input())
+for i in range()
+Union(4, 2)
+Union(1, 4)
+Union(1, 3)
+Union(9, 5)
 
 
 
+if Find(a) == Find(b):
+    print('O')
+else: print('X')
