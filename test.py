@@ -1410,7 +1410,7 @@ from collections import deque
 # else: print('X')
 
 
-boss = [i for i in range(8)]
+'''boss = [i for i in range(8)]
 def Find(n):
     if boss[n] == n:  # 가리키는 보스가 자기 자신이면
         return n  # 최종 보스다
@@ -1434,15 +1434,14 @@ a, b = map(int, input().split())
 if Find(a) == Find(b):
     print('O')
 else: print('X')
+'''
 
-
-boss = [i for i in range(10)]
+'''boss = [i for i in range(10)]
 
 def Find(n):
     if boss[n] == n: return n
-
-    result = Find(boss[n])
-    return result
+    boss[n] = Find(boss[n])
+    return Find(boss[n])
 
 def Union(t1, t2):
     a = Find(t1)
@@ -1450,15 +1449,375 @@ def Union(t1, t2):
 
     if a == b: return
     boss[b] = a
+
+
 N = int(input())
-for i in range()
-Union(4, 2)
-Union(1, 4)
-Union(1, 3)
-Union(9, 5)
+for i in range(N):
+    m, n = map(int, input().split())
+    Union(m, n)
+
+M = int(input())
+for i in range(M):
+    a, b = map(int, input().split())
+
+    if Find(a) == Find(b):
+        print('O')
+    else: print('X')'''
 
 
 
-if Find(a) == Find(b):
-    print('O')
+'''
+boss = [i for i in range(200)]
+
+def Find(n):
+    if boss[n] == n: return n
+
+    boss[n] = Find(boss[n])
+    return boss[n]
+
+def Union(t1, t2):
+    a = Find(t1)
+    b = Find(t2)
+
+    if a == b: return
+    boss[b] = a
+
+N = int(input())
+for _ in range(N):
+    q, w = input().split()
+    Union(ord(q), ord(w))
+
+e, r = input().split()
+
+if Find(ord(e)) == Find(ord(r)): print('O')
 else: print('X')
+'''
+# M, N = map(int, input().split())
+#
+# boss = [i for i in range(200)]
+#
+# def Find(n):
+#     if boss[n] == n: return n
+#
+#     boss[n] = Find(boss[n])
+#     return boss[n]
+#
+# def Union(t1, t2):
+#     a = Find(t1)
+#     b = Find(t2)
+#     if a == b: return
+#
+#     boss[b] = a
+#
+#
+#
+# sum_v = 0
+# arr = []
+#
+# for i in range(M):
+#     q, w, e = input().split()
+#     arr.append((ord(q), ord(w), int(e)))
+# arr.sort(key=lambda x:x[2])
+#
+# for q, w, e in arr:
+#     if Find(q) != Find(w):
+#         Union(q, w)
+#         sum_v += e
+#
+# print(f'{sum_v}')
+
+
+# boss = [i for i in range(200)]
+#
+# def Find(n):
+#     if boss[n] == n: return n
+#
+#     boss[n] = Find(boss[n])
+#     return boss[n]
+#
+# def Union(t1, t2):
+#     a = Find(t1)
+#     b = Find(t2)
+#
+#     if a == b: return
+#     boss[b] = a
+#
+#
+# N, M = map(int, input().split())
+# arr = []
+# path = []
+# cnt = 0
+# sum_v = 0
+# arr = input().split()
+#
+# for i in range(M):
+#     u, v, d = map(int, input().split())
+#     path.append((u, v, d))
+# path.sort(key=lambda x: x[2])
+#
+#
+#
+# for u, v, d in path:
+#     if arr[u-1] == arr[v-1]: continue
+#     elif Find(u) != Find(v):
+#         Union(u, v)
+#         sum_v += d
+#         cnt += 1
+#
+#         if cnt == N - 1: break
+# if cnt != N-1:
+#     print(f'-1')
+# else: print(f'{sum_v}')
+
+
+
+############################################################################
+'''
+boss = [i for i in range(200)]
+def Find(n):
+    global cnt_find
+    if boss[n] == n:
+
+        return n
+
+    boss[n] = Find(boss[n])
+    return boss[n]
+
+def Union(t1, t2):
+    a = Find(t1)
+    b = Find(t2)
+
+    if a == b: return
+    boss[b] = a
+
+N = int(input())
+cnt = 0
+cnt_find = 0
+arr = []
+alist = [0 if i <= 64 else i for i in range(91)]
+for i in range(N):
+    q, w = input().split()
+
+
+    if Find(ord(q)) == Find(ord(w)): continue
+
+    # if Find(ord(q)) in arr and Find(ord(w)) not in arr:
+    # if Find(ord(q)) not in arr and Find(ord(w)) not in arr:
+    #     cnt_a += 1
+    # if Union(ord(q), ord(w)) == True: cnt_a += 1
+
+
+    if Find(ord(q)) not in arr or Find(ord(w)) not in arr:
+        if Find(ord(q)) in arr and Find(ord(w)) not in arr:
+            cnt -= 1
+        elif Find(ord(q)) not in arr and Find(ord(w)) in arr:
+            cnt -= 1
+        if Find(ord(q)) not in arr:
+            arr.append(Find(ord(q)))
+        if Find(ord(w)) not in arr:
+            arr.append(Find(ord(w)))
+        Union(ord(q), ord(w))
+        cnt += 1
+    else: continue
+
+cnt_find = 26 - cnt - N
+print(cnt)
+print(cnt_find)
+'''
+
+
+
+
+
+
+
+
+# def Find(n):
+#     if boss[n] == n: return n
+#     boss[n] = Find(boss[n])
+#     return boss[n]
+#
+# def Union(t1, t2):
+#     a = Find(t1)
+#     b = Find(t2)
+#     if a == b: return
+#     boss[b] = a
+#
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     boss = [i for i in range(N)]
+#     arr = []
+#     min_v = 0
+#     cnt = 0
+#     x = list(map(int, input().split()))
+#     y = list(map(int, input().split()))
+#     E = float(input())
+#     for i in range(N):
+#         for j in range(i + 1, N):
+#             dist = (x[i] - x[j]) ** 2 + (y[i] - y[j]) ** 2
+#             cost = E * dist
+#             arr.append((i, j, cost))
+#     arr.sort(key=lambda x: x[2])
+#
+#     for u, v, d in arr:
+#         if Find(u) == Find(v): continue
+#         if Find(u) != Find(v):
+#             Union(u, v)
+#             cnt += 1
+#             min_v += d
+#
+#         if cnt == N - 1:
+#             break
+#     print(f'#{tc} {round(min_v)}')
+
+
+
+
+'''
+import heapq
+
+MAP = [[0] * 6 for _ in range(6)]
+MAP[0][1] = 15
+MAP[0][2] = 17
+MAP[0][3] = 22
+MAP[1][2] = 5
+MAP[2][3] = 6
+MAP[2][4] = 2
+MAP[2][5] = 8
+MAP[3][5] = 7
+MAP[4][5] = 1
+
+def dijkstra(start):
+    n = len(MAP) # 노드의 개수 6개
+    result = [float('inf')] * n
+    result[start] = 0 # 시작 노드
+    # PQ 초기화
+    q = [(0, start)] # 비용, 노드
+
+    while q: # PQ가 빌때까지 반복
+        # 1. 힙에서 뺀다(탐색)
+        price, now = heapq.heappop(q) # 최소 비용
+
+        if result[now] < price: continue # 더 큰값 나오면 continue
+
+        # 2. 다음 갈곳 예약 걸기(힙 등록)
+        for i in range(n):
+            if MAP[now][i] == 0: continue
+            next_price = MAP[now][i] # 다음 노드까지 비용
+            price_sum = price + next_price # 비용이 누적
+            if result[i] > price_sum: # 더 작은 비용 나오면 갱신
+                result[i] = price_sum
+                # 힙등록 price_sum은 시작노드부터 i번 노드까지
+                heapq.heappush(q, (price_sum, i))
+
+    return result
+
+result = dijkstra(0) # start가 0번노드
+print(*result)
+'''
+
+# import heapq
+#
+# MAP = [[0] * 6 for _ in range(6)]
+# MAP[0][1] = 15
+# MAP[0][2] = 17
+# MAP[0][3] = 22
+# MAP[1][2] = 5
+# MAP[2][3] = 6
+# MAP[2][4] = 2
+# MAP[3][5] = 7
+# MAP[4][5] = 1
+#
+# def dijkstra(start):
+#     n = len(MAP)
+#     result = [float('inf')] * n
+#     result[start] = 0
+#     q = [(0, start)]
+#
+#     while q:
+#         price, now = heapq.heappop(q)
+#         if result[now] < price: continue
+#
+#         for i in range(n):
+#             if MAP[now][i] == 0: continue
+#             next_price = MAP[now][i]
+#             price_sum = price + next_price
+#             if result[i] > price_sum:
+#                 result[i] = price_sum
+#
+#                 heapq.heappush(q, (price_sum, i))
+#     return result
+# result = dijkstra(0)
+# print(*result)
+'''
+from heapq import heappop, heappush
+
+dy = [-1, 1, 0, 0]
+dx = [0, 0, -1, 1]
+
+N, M = map(int, input().split())
+MAP = [list(map(int, input().split())) for _ in range(N)]
+
+def dijkstra(MAP):
+    n = len(MAP)
+    m = len(MAP[0])
+    result = [[float('inf')] * M for _ in range(N)]
+    result[0][0] = MAP[0][0] # 시작 위치
+    q = [(0, 0, MAP[0][0])]
+
+
+    while q:
+        y_now, x_now, cost = heappop(q)
+        if result[y_now][x_now] < cost: continue
+
+        for i in range(4):
+            ny = y_now + dy[i]
+            nx = x_now + dx[i]
+
+            if nx < 0 or nx >= M or ny < 0 or ny >= N: continue
+
+            next_cost = result[y_now][x_now] + MAP[ny][nx]
+            if result[ny][nx] > next_cost:
+                result[ny][nx] = next_cost
+
+                heappush(q, (ny, nx, next_cost))
+    return result[n-1][m-1]
+
+print(dijkstra(MAP))
+'''
+
+from heapq import heappush, heappop
+
+dy = [-1, 1, 0, 0]
+dx = [0, 0, -1, 1]
+
+def dijkstra(MAP):
+    n = len(MAP)
+    result = [[float('inf')] * n for _ in range(n)]
+    result[0][0] = MAP[0][0]
+    q = [(0, 0, MAP[0][0])]
+
+    while q:
+        x, y, cost = heappop(q)
+        if result[y][x] < cost: continue
+
+        for i in range(4):
+            ny = y + dy[i]
+            nx = x + dx[i]
+            if ny < 0 or ny >= N or nx < 0 or nx >= N: continue
+
+            next_cost = MAP[ny][nx]
+            sum_cost = cost + next_cost
+
+            if result[ny][nx] > sum_cost:
+                result[ny][nx] = sum_cost
+                heappush(q, (ny, nx, sum_cost))
+    return result[n-1][n-1]
+
+T = int(input())
+for tc in range(1, T + 1):
+    N = int(input())
+    MAP = [list(map(int, input())) for _ in range(N)]
+    print(f'#{tc} {dijkstra(MAP)}')
