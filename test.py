@@ -1787,8 +1787,44 @@ def dijkstra(MAP):
 
 print(dijkstra(MAP))
 '''
+#
+# from heapq import heappush, heappop
+#
+# dy = [-1, 1, 0, 0]
+# dx = [0, 0, -1, 1]
+#
+# def dijkstra(MAP):
+#     n = len(MAP)
+#     result = [[float('inf')] * n for _ in range(n)]
+#     result[0][0] = MAP[0][0]
+#     q = [(0, 0, MAP[0][0])]
+#
+#     while q:
+#         x, y, cost = heappop(q)
+#         if result[y][x] < cost: continue
+#
+#         for i in range(4):
+#             ny = y + dy[i]
+#             nx = x + dx[i]
+#             if ny < 0 or ny >= N or nx < 0 or nx >= N: continue
+#
+#             next_cost = MAP[ny][nx]
+#             sum_cost = cost + next_cost
+#
+#             if result[ny][nx] > sum_cost:
+#                 result[ny][nx] = sum_cost
+#                 heappush(q, (ny, nx, sum_cost))
+#     return result[n-1][n-1]
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     MAP = [list(map(int, input())) for _ in range(N)]
+#     print(f'#{tc} {dijkstra(MAP)}')
 
-from heapq import heappush, heappop
+
+
+'''from heapq import heappush, heappop
 
 dy = [-1, 1, 0, 0]
 dx = [0, 0, -1, 1]
@@ -1796,28 +1832,30 @@ dx = [0, 0, -1, 1]
 def dijkstra(MAP):
     n = len(MAP)
     result = [[float('inf')] * n for _ in range(n)]
-    result[0][0] = MAP[0][0]
-    q = [(0, 0, MAP[0][0])]
+    result[0][0] = 0   # 시작점은 비용 0
+    q = [(0, 0, 0)]    # (누적비용, y, x)
 
     while q:
-        x, y, cost = heappop(q)
-        if result[y][x] < cost: continue
+        cost, y, x = heappop(q)
+        if result[y][x] < cost:
+            continue
 
         for i in range(4):
-            ny = y + dy[i]
-            nx = x + dx[i]
-            if ny < 0 or ny >= N or nx < 0 or nx >= N: continue
+            ny, nx = y + dy[i], x + dx[i]
+            if ny < 0 or ny >= n or nx < 0 or nx >= n:
+                continue
 
-            next_cost = MAP[ny][nx]
-            sum_cost = cost + next_cost
-
+            sum_cost = cost + MAP[ny][nx]
             if result[ny][nx] > sum_cost:
                 result[ny][nx] = sum_cost
-                heappush(q, (ny, nx, sum_cost))
+                heappush(q, (sum_cost, ny, nx))
+
     return result[n-1][n-1]
 
+# 실행 부분
 T = int(input())
 for tc in range(1, T + 1):
     N = int(input())
-    MAP = [list(map(int, input())) for _ in range(N)]
+    MAP = [list(map(int, input().strip())) for _ in range(N)]
     print(f'#{tc} {dijkstra(MAP)}')
+'''
